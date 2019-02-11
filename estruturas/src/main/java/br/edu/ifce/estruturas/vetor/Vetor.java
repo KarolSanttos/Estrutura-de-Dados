@@ -27,7 +27,7 @@ public class Vetor {
 	        return this.alunos[posicao];
 	}
 
-	public void remover(int posicao) {
+	public void remover(Aluno a1) {
 	    this.alunos[totalDeElementos] = aluno;
 	    this.totalDeElementos--;
 	}
