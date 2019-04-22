@@ -2,43 +2,55 @@ package br.edu.ifce.estruturas.vetor;
 
 public class Vetor {
 
-	private Aluno[] alunos = new Aluno[100];
+	private Object[] objetos = new Object[100];
 	private int totalDeElementos = 0;
 
-	public void adiciona(Aluno aluno) {
-	    this.alunos[totalDeElementos] = aluno;
+	public void adiciona(Object objeto) {
+		this.garanteEspaco();
+	    this.objetos[totalDeElementos] = objetos;
 	    this.totalDeElementos++;
 	}
 
-	public void adiciona(int posicao, Aluno aluno) {
+	public void adiciona(int posicao, Object objeto) {
+		this.garanteEspaco();
         for(int i = this.totalDeElementos; i>posicao; i--){
-            alunos[i] = alunos[i-1];
+            objetos[i] = objetos[i-1];
         }
 
-        this.alunos[posicao] = aluno;
+        this.objetos[posicao] = objeto;
         this.totalDeElementos++;
 	}
 
-	public Aluno pega(int posicao) {
+	public Object pega(int posicao) {
 	    if(posicaoOcupada(posicao) == false){
 	        throw new IllegalArgumentException("Posicao invalida");
 	        }
 
-	        return this.alunos[posicao];
+	        return this.objetos[posicao];
 	}
 
-	public void remover(Aluno a1) {
-	    this.alunos[totalDeElementos] = aluno;
+	public void remover(Object a1) {
+	    this.objetos[totalDeElementos] = null;
 	    this.totalDeElementos--;
 	}
 
-	public boolean contem(Aluno aluno) {
+	public boolean contem(Object objeto) {
 		for (int i = 0; i < this.totalDeElementos; i++) {
-			if (aluno == this.alunos[i]) {
+			if (objeto == this.objetos[i]) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	private void garanteEspaco() {
+		if(this.totalDeElementos == this.objetos.length) {
+			Object [] novoArray = new Object[this.objetos.length*2];
+			for(int i=0; i < this.totalDeElementos-1; i++) {
+				novoArray[i] = this.objetos[i];
+			}
+			this.objetos = novoArray; 
+		}
 	}
 
 	public int tamanho() {
@@ -58,16 +70,16 @@ public class Vetor {
 		if (this.totalDeElementos == 0) {
 			return "[]";
 		}
-
+		
 		StringBuilder builder = new StringBuilder();
 		builder.append("[");
 
 		for (int i = 0; i < this.totalDeElementos - 1; i++) {
-			builder.append(this.alunos[i]);
+			builder.append(this.objetos[i]);
 			builder.append(", ");
 		}
 
-		builder.append(this.alunos[this.totalDeElementos - 1]);
+		builder.append(this.objetos[this.totalDeElementos - 1]);
 		builder.append("]");
 
 		return builder.toString();

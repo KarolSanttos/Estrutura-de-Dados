@@ -16,9 +16,10 @@ public class Aluno {
 		return this.nome;
 	}
 	
-	public boolean equals(Object o) {
-		Aluno outro = (Aluno)o;
-		return this.nome.equals(outro.nome);
+	public boolean equals(Object obj) {
+		Aluno novo = (Aluno) obj;
+		return this.nome.equals(novo.nome);
 	}
 	
 }
+
